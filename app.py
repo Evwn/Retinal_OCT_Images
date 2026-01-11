@@ -155,6 +155,8 @@ def predict():
             'predicted_class': result['predicted_class'],
             'confidence': result['confidence'],
             'all_predictions': result['all_predictions'],
+            'description': result['description'],
+            'recommendation': result['recommendation'],
             'filename': filename
         }), 200
     
