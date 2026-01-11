@@ -1,6 +1,5 @@
 let selectedFile = null;
 
-// File input event listener
 document.getElementById('imageInput').addEventListener('change', function(e) {
     selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -10,7 +9,6 @@ document.getElementById('imageInput').addEventListener('change', function(e) {
     }
 });
 
-// Drag and drop functionality
 const uploadBox = document.querySelector('.upload-box');
 
 uploadBox.addEventListener('dragover', (e) => {
@@ -68,16 +66,13 @@ function predictImage() {
         return;
     }
     
-    // Show loading
     document.getElementById('loadingSection').style.display = 'block';
     document.getElementById('resultsSection').style.display = 'none';
     document.getElementById('errorSection').style.display = 'none';
     
-    // Prepare form data
     const formData = new FormData();
     formData.append('file', selectedFile);
     
-    // Send to backend
     fetch('/api/predict', {
         method: 'POST',
         body: formData
@@ -102,16 +97,18 @@ function predictImage() {
 }
 
 function displayResults(data) {
-    // Display predicted class (only the diagnosis — no percentages)
+    // Display predicted class
     document.getElementById('predictedClass').textContent = data.predicted_class;
 
-    // Display a short description for the diagnosis
+    const confidence = Math.round(data.confidence * 100);
+    document.getElementById('confidenceValue').textContent = confidence;
+
     document.getElementById('predictedDescription').textContent = data.description || '';
 
-    // Display filename or source info
-    document.getElementById('resultFilename').textContent = data.filename || '';
+    document.getElementById('predictedRecommendation').textContent = data.recommendation || '';
 
-    // Show results
+    document.getElementById('resultFilename').textContent = 'File: ' + (data.filename || 'uploaded');
+
     document.getElementById('resultsSection').style.display = 'block';
 }
 
@@ -135,7 +132,6 @@ function resetForm() {
     document.getElementById('predictBtn').disabled = true;
 }
 
-// Check model health on page load
 window.addEventListener('load', () => {
     fetch('/api/health')
         .then(response => response.json())

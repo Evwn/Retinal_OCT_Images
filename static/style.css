@@ -180,13 +180,79 @@ main {
 
 .result-card.modern {
     display: flex;
-    gap: 20px;
-    align-items: stretch;
-    padding: 26px;
+    flex-direction: column;
+    gap: 18px;
+    padding: 28px;
     border-radius: 12px;
     margin-bottom: 20px;
     background: linear-gradient(180deg, #ffffff, #fbfdff);
     border: 1px solid #e6edf7;
+}
+
+.result-top {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eef4fb;
+}
+
+.result-top h2 {
+    font-size: 1.1em;
+    color: #64748b;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.predicted-class {
+    font-size: 2.2em;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 8px 0;
+}
+
+.confidence-text {
+    font-size: 1.05em;
+    color: #475569;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.result-description {
+    padding: 16px 0;
+}
+
+.result-description h3,
+.result-recommendation h3 {
+    font-size: 0.95em;
+    color: #334155;
+    margin-bottom: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.result-description p,
+.result-recommendation p {
+    color: #475569;
+    line-height: 1.6;
+    font-size: 0.95em;
+}
+
+.result-recommendation {
+    padding: 16px 0;
+    border-top: 1px solid #eef4fb;
+}
+
+.result-footer {
+    padding-top: 16px;
+    border-top: 1px solid #eef4fb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.file-note {
+    font-size: 0.85em;
+    color: #94a3b8;
+    margin: 0;
 }
 
 .result-left {

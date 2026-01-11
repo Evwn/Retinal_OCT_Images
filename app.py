@@ -19,11 +19,9 @@ if not os.path.exists(UPLOAD_FOLDER):
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE
 
-# Model configuration
 MODEL_PATH = 'oct_diagnosis_model.keras'
-IMG_SIZE = (128, 128)  # Model trained on 128x128 images
+IMG_SIZE = (128, 128)  
 
-# Label mapping - adjust these based on your model's classes
 LABEL_MAP = {
     'DRUSEN': 0,
     'CNV': 1,
@@ -31,10 +29,8 @@ LABEL_MAP = {
     'DME': 3
 }
 
-# Reverse mapping
 IDX_TO_LABEL = {v: k for k, v in LABEL_MAP.items()}
 
-# Human-friendly descriptions for each class (sent to frontend)
 CLASS_DESCRIPTIONS = {
     'DRUSEN': 'Yellow deposits under the retina — may indicate age-related changes.',
     'CNV': 'Choroidal neovascularization — presence of abnormal blood vessels and fluid.',
@@ -42,7 +38,13 @@ CLASS_DESCRIPTIONS = {
     'DME': 'Diabetic macular edema — fluid accumulation in the macula associated with diabetes.'
 }
 
-# Global model variable
+CLASS_RECOMMENDATIONS = {
+    'DRUSEN': 'Monitor retinal changes closely. Schedule regular eye examinations every 3-6 months. Consider antioxidant supplements after consulting with your ophthalmologist.',
+    'CNV': 'Seek immediate ophthalmologic attention. Anti-VEGF injections or laser therapy may be recommended. Arrange follow-up imaging within 1-2 weeks.',
+    'NORMAL': 'Continue routine eye care. Maintain a healthy lifestyle with regular exercise and balanced diet. Schedule annual eye examinations.',
+    'DME': 'Consult an endocrinologist to optimize blood sugar control. Ophthalmologic treatment with injections or laser therapy may be necessary. Follow up within 1-2 weeks.'
+}
+
 loaded_model = None
 
 def load_model():
@@ -67,22 +69,18 @@ def allowed_file(filename):
 def preprocess_image(image_path):
     """Preprocess image the same way as in your Colab notebook"""
     try:
-        # Read image as grayscale
+
         img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
         
         if img is None:
             return None, "Failed to read image"
         
-        # Resize to model input size
         img = cv2.resize(img, IMG_SIZE)
         
-        # Normalize to [0, 1]
         img = img / 255.0
         
-        # Add channel dimension (1 for grayscale)
         img = np.expand_dims(img, axis=-1)
         
-        # Add batch dimension
         img = np.expand_dims(img, axis=0)
         
         return img, None
@@ -95,22 +93,17 @@ def predict_image(image_path):
         if loaded_model is None:
             return None, "Model not loaded"
         
-        # Preprocess image
         processed_img, error = preprocess_image(image_path)
         if error:
             return None, error
         
-        # Make prediction
         predictions = loaded_model.predict(processed_img)
         predicted_class_index = np.argmax(predictions, axis=1)[0]
         
-        # Get predicted label
         predicted_label_name = IDX_TO_LABEL.get(predicted_class_index, "Unknown")
         
-        # Get confidence score
         confidence = float(predictions[0][predicted_class_index])
         
-        # Get all predictions with probabilities
         all_predictions = {
             IDX_TO_LABEL.get(i, "Unknown"): float(predictions[0][i])
             for i in range(len(predictions[0]))
@@ -121,6 +114,7 @@ def predict_image(image_path):
             'confidence': confidence,
             'all_predictions': all_predictions,
             'description': CLASS_DESCRIPTIONS.get(predicted_label_name, ""),
+            'recommendation': CLASS_RECOMMENDATIONS.get(predicted_label_name, ""),
             'error': None
         }, None
     except Exception as e:
@@ -135,7 +129,7 @@ def index():
 def predict():
     """API endpoint for image prediction"""
     try:
-        # Check if file is in request
+
         if 'file' not in request.files:
             return jsonify({'error': 'No file provided'}), 400
         
@@ -147,12 +141,10 @@ def predict():
         if not allowed_file(file.filename):
             return jsonify({'error': 'File type not allowed. Allowed: ' + ', '.join(ALLOWED_EXTENSIONS)}), 400
         
-        # Save uploaded file
         filename = secure_filename(file.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         
-        # Make prediction
         result, error = predict_image(filepath)
         
         if error:
@@ -187,6 +179,6 @@ def before_request():
         load_model()
 
 if __name__ == '__main__':
-    # Load model on startup
+
     load_model()
     app.run(debug=True, host='0.0.0.0', port=5000)

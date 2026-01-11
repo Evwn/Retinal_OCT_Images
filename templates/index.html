@@ -16,7 +16,6 @@
         <main>
             <section class="upload-section">
                 <div class="upload-box">
-                    <div class="upload-icon">📤</div>
                     <h2>Upload OCT Image</h2>
                     <p>Drag and drop your image here or click to browse</p>
                     
@@ -50,14 +49,24 @@
                 <h2>Prediction Results</h2>
                 
                 <div class="result-card modern">
-                    <div class="result-left">
-                        <h2 class="result-title">Diagnosis</h2>
+                    <div class="result-top">
+                        <h2>Diagnosis Result</h2>
                         <p class="predicted-class" id="predictedClass"></p>
-                        <p class="result-sub" id="resultFilename"></p>
+                        <p class="confidence-text">Confidence: <span id="confidenceValue">0</span>%</p>
                     </div>
-                    <div class="result-right">
-                        <h3 class="desc-title">What this means</h3>
-                        <p id="predictedDescription" class="predicted-description"></p>
+                    
+                    <div class="result-description">
+                        <h3>What this means</h3>
+                        <p id="predictedDescription"></p>
+                    </div>
+                    
+                    <div class="result-recommendation">
+                        <h3>Recommended Actions</h3>
+                        <p id="predictedRecommendation"></p>
+                    </div>
+                    
+                    <div class="result-footer">
+                        <p id="resultFilename" class="file-note"></p>
                         <button class="btn btn-primary" onclick="resetForm()">Analyze Another Image</button>
                     </div>
                 </div>
