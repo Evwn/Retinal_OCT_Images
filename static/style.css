@@ -5,37 +5,37 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: Inter, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg, #f4f6fb 0%, #ffffff 100%);
     min-height: 100vh;
     padding: 20px;
 }
 
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 980px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(19, 24, 44, 0.08);
     overflow: hidden;
 }
 
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
+    background: transparent;
+    color: #0f172a;
+    padding: 34px 28px;
+    text-align: left;
 }
 
 header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
+    font-size: 1.6em;
+    margin-bottom: 6px;
     font-weight: 700;
 }
 
 header .subtitle {
-    font-size: 1.1em;
-    opacity: 0.9;
+    font-size: 0.95em;
+    opacity: 0.7;
 }
 
 main {
@@ -44,17 +44,17 @@ main {
 
 .upload-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 24px;
     margin-bottom: 30px;
 }
 
 .upload-box, .preview-box {
-    border: 2px dashed #667eea;
-    border-radius: 15px;
-    padding: 30px;
+    border: 1px solid #e6e9ef;
+    border-radius: 12px;
+    padding: 26px;
     text-align: center;
-    background: #f8f9ff;
+    background: #fbfcff;
     transition: all 0.3s ease;
 }
 
@@ -64,7 +64,7 @@ main {
 }
 
 .upload-icon {
-    font-size: 3em;
+    font-size: 2.4em;
     margin-bottom: 15px;
 }
 
@@ -87,10 +87,10 @@ main {
 
 #imagePreview {
     max-width: 100%;
-    max-height: 300px;
-    border-radius: 10px;
-    margin-top: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-height: 320px;
+    border-radius: 8px;
+    margin-top: 12px;
+    box-shadow: 0 6px 22px rgba(16, 24, 40, 0.06);
 }
 
 .no-preview {
@@ -113,9 +113,9 @@ main {
 }
 
 .btn {
-    padding: 12px 30px;
+    padding: 10px 18px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 1em;
     font-weight: 600;
     cursor: pointer;
@@ -124,8 +124,9 @@ main {
 }
 
 .btn-primary {
-    background: #667eea;
+    background: linear-gradient(90deg,#4f46e5,#06b6d4);
     color: white;
+    box-shadow: 0 8px 24px rgba(79,70,229,0.12);
 }
 
 .btn-primary:hover {
@@ -135,7 +136,7 @@ main {
 }
 
 .btn-success {
-    background: #10b981;
+    background: #0ea5a6;
     color: white;
 }
 
@@ -177,12 +178,25 @@ main {
     font-size: 1.5em;
 }
 
-.result-card {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 25px;
+.result-card.modern {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    padding: 26px;
     border-radius: 12px;
     margin-bottom: 20px;
+    background: linear-gradient(180deg, #ffffff, #fbfdff);
+    border: 1px solid #e6edf7;
+}
+
+.result-left {
+    flex: 1.1;
+}
+
+.result-right {
+    flex: 1;
+    border-left: 1px solid #eef4fb;
+    padding-left: 18px;
 }
 
 .result-header {
@@ -197,10 +211,10 @@ main {
 }
 
 .predicted-class {
-    font-size: 2em;
-    font-weight: 700;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
+    font-size: 1.8em;
+    font-weight: 800;
+    color: #0b1220;
+    padding: 8px 12px;
     border-radius: 8px;
 }
 
@@ -234,11 +248,7 @@ main {
 }
 
 .probabilities-card {
-    background: #f8f9ff;
-    padding: 20px;
-    border-radius: 12px;
-    border-left: 4px solid #667eea;
-    margin-bottom: 20px;
+    display: none;
 }
 
 .probabilities-card h3 {
@@ -288,10 +298,7 @@ main {
 }
 
 .info-card {
-    background: #f0fdf4;
-    padding: 15px;
-    border-radius: 12px;
-    border-left: 4px solid #10b981;
+    display: none;
 }
 
 .info-card p {
@@ -330,10 +337,10 @@ main {
 }
 
 .error-section {
-    background: #fef2f2;
-    border: 2px solid #fca5a5;
+    background: #fff6f6;
+    border: 1px solid #ffd7d7;
     border-radius: 12px;
-    padding: 25px;
+    padding: 22px;
     text-align: center;
 }
 
@@ -343,7 +350,7 @@ main {
 }
 
 .error-section h3 {
-    color: #dc2626;
+    color: #b91c1c;
     margin-bottom: 10px;
 }
 
@@ -353,11 +360,11 @@ main {
 }
 
 footer {
-    background: #f3f4f6;
-    padding: 20px;
+    background: transparent;
+    padding: 18px 28px;
     text-align: center;
-    color: #666;
-    border-top: 1px solid #e5e7eb;
+    color: #64748b;
+    border-top: 1px solid #f1f5f9;
     font-size: 0.9em;
 }
 

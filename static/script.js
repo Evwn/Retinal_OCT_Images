@@ -102,39 +102,15 @@ function predictImage() {
 }
 
 function displayResults(data) {
-    // Display predicted class
+    // Display predicted class (only the diagnosis — no percentages)
     document.getElementById('predictedClass').textContent = data.predicted_class;
-    
-    // Display confidence
-    const confidence = Math.round(data.confidence * 100);
-    document.getElementById('confidenceValue').textContent = confidence;
-    document.getElementById('confidenceBar').style.width = confidence + '%';
-    
-    // Display all probabilities
-    const probabilitiesList = document.getElementById('probabilitiesList');
-    probabilitiesList.innerHTML = '';
-    
-    // Sort predictions by value (descending)
-    const sortedPredictions = Object.entries(data.all_predictions)
-        .sort((a, b) => b[1] - a[1]);
-    
-    sortedPredictions.forEach(([label, probability]) => {
-        const percentage = Math.round(probability * 100);
-        const item = document.createElement('div');
-        item.className = 'probability-item';
-        item.innerHTML = `
-            <span class="probability-label">${label}</span>
-            <div class="probability-bar">
-                <div class="probability-fill" style="width: ${percentage}%"></div>
-            </div>
-            <span class="probability-value">${percentage}%</span>
-        `;
-        probabilitiesList.appendChild(item);
-    });
-    
-    // Display filename
-    document.getElementById('resultFilename').textContent = data.filename;
-    
+
+    // Display a short description for the diagnosis
+    document.getElementById('predictedDescription').textContent = data.description || '';
+
+    // Display filename or source info
+    document.getElementById('resultFilename').textContent = data.filename || '';
+
     // Show results
     document.getElementById('resultsSection').style.display = 'block';
 }

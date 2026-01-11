@@ -25,14 +25,22 @@ IMG_SIZE = (128, 128)  # Model trained on 128x128 images
 
 # Label mapping - adjust these based on your model's classes
 LABEL_MAP = {
-    'CNV': 0,
-    'DME': 1,
-    'DRUSEN': 2,
-    'NORMAL': 3
+    'DRUSEN': 0,
+    'CNV': 1,
+    'NORMAL': 2,
+    'DME': 3
 }
 
 # Reverse mapping
 IDX_TO_LABEL = {v: k for k, v in LABEL_MAP.items()}
+
+# Human-friendly descriptions for each class (sent to frontend)
+CLASS_DESCRIPTIONS = {
+    'DRUSEN': 'Yellow deposits under the retina — may indicate age-related changes.',
+    'CNV': 'Choroidal neovascularization — presence of abnormal blood vessels and fluid.',
+    'NORMAL': 'No signs of retinal disease detected.',
+    'DME': 'Diabetic macular edema — fluid accumulation in the macula associated with diabetes.'
+}
 
 # Global model variable
 loaded_model = None
@@ -112,6 +120,7 @@ def predict_image(image_path):
             'predicted_class': predicted_label_name,
             'confidence': confidence,
             'all_predictions': all_predictions,
+            'description': CLASS_DESCRIPTIONS.get(predicted_label_name, ""),
             'error': None
         }, None
     except Exception as e:
