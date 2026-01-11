@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCT Image Diagnosis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OCT Image Diagnosis</h1>
+            <p class="subtitle">Upload OCT images to get diagnostic predictions</p>
+        </header>
+
+        <main>
+            <section class="upload-section">
+                <div class="upload-box">
+                    <div class="upload-icon">📤</div>
+                    <h2>Upload OCT Image</h2>
+                    <p>Drag and drop your image here or click to browse</p>
+                    
+                    <input type="file" id="imageInput" accept=".png,.jpg,.jpeg,.bmp,.tiff" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('imageInput').click()">
+                        Choose Image
+                    </button>
+                    
+                    <div id="fileInfo" class="file-info" style="display: none;">
+                        <p id="fileName"></p>
+                    </div>
+                </div>
+
+                <div class="preview-box">
+                    <h3>Image Preview</h3>
+                    <img id="imagePreview" src="" alt="Image preview" style="display: none;">
+                    <p id="noPreview" class="no-preview">No image selected</p>
+                </div>
+            </section>
+
+            <section class="button-section">
+                <button class="btn btn-success" id="predictBtn" onclick="predictImage()" disabled>
+                    Get Prediction
+                </button>
+                <button class="btn btn-secondary" onclick="resetForm()">
+                    Clear
+                </button>
+            </section>
+
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Prediction Results</h2>
+                
+                <div class="result-card">
+                    <div class="result-header">
+                        <h3>Diagnosis</h3>
+                        <p class="predicted-class" id="predictedClass"></p>
+                    </div>
+                    
+                    <div class="confidence-bar">
+                        <label>Confidence: <span id="confidenceValue">0</span>%</label>
+                        <div class="bar-container">
+                            <div class="bar-fill" id="confidenceBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="probabilities-card">
+                    <h3>All Class Probabilities</h3>
+                    <div id="probabilitiesList" class="probabilities-list"></div>
+                </div>
+
+                <div class="info-card">
+                    <p><strong>File:</strong> <span id="resultFilename"></span></p>
+                    <p><strong>Processing:</strong> Completed</p>
+                </div>
+            </section>
+
+            <section id="loadingSection" class="loading-section" style="display: none;">
+                <div class="spinner"></div>
+                <p>Processing image...</p>
+            </section>
+
+            <section id="errorSection" class="error-section" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <h3>Error</h3>
+                <p id="errorMessage"></p>
+                <button class="btn btn-secondary" onclick="hideError()">Dismiss</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>OCT Diagnosis Model | Powered by TensorFlow</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
