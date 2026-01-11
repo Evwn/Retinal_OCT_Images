@@ -255,6 +255,44 @@ main {
     margin: 0;
 }
 
+/* Special styling for NONE class (unrelated images) */
+.result-card.modern.result-invalid {
+    background: linear-gradient(180deg, #fef8f7, #fff5f3);
+    border: 1px solid #fecaca;
+}
+
+.result-invalid .result-top {
+    border-bottom-color: #fed7d7;
+}
+
+.result-invalid .predicted-class {
+    color: #b91c1c;
+    background: #fee2e2;
+    padding: 12px 16px;
+}
+
+.result-invalid .confidence-text {
+    color: #991b1b;
+}
+
+.result-invalid .result-description h3,
+.result-invalid .result-recommendation h3 {
+    color: #991b1b;
+}
+
+.result-invalid .result-description p,
+.result-invalid .result-recommendation p {
+    color: #7c2d12;
+}
+
+.result-invalid .result-recommendation {
+    border-top-color: #fed7d7;
+}
+
+.result-invalid .result-footer {
+    border-top-color: #fed7d7;
+}
+
 .result-left {
     flex: 1.1;
 }

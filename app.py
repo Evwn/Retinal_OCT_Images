@@ -26,7 +26,8 @@ LABEL_MAP = {
     'DRUSEN': 0,
     'CNV': 1,
     'NORMAL': 2,
-    'DME': 3
+    'DME': 3,
+    'NONE': 4
 }
 
 IDX_TO_LABEL = {v: k for k, v in LABEL_MAP.items()}
@@ -35,14 +36,16 @@ CLASS_DESCRIPTIONS = {
     'DRUSEN': 'Yellow deposits under the retina — may indicate age-related changes.',
     'CNV': 'Choroidal neovascularization — presence of abnormal blood vessels and fluid.',
     'NORMAL': 'No signs of retinal disease detected.',
-    'DME': 'Diabetic macular edema — fluid accumulation in the macula associated with diabetes.'
+    'DME': 'Diabetic macular edema — fluid accumulation in the macula associated with diabetes.',
+    'NONE': 'The uploaded image does not appear to be a retinal OCT scan.'
 }
 
 CLASS_RECOMMENDATIONS = {
     'DRUSEN': 'Monitor retinal changes closely. Schedule regular eye examinations every 3-6 months. Consider antioxidant supplements after consulting with your ophthalmologist.',
     'CNV': 'Seek immediate ophthalmologic attention. Anti-VEGF injections or laser therapy may be recommended. Arrange follow-up imaging within 1-2 weeks.',
     'NORMAL': 'Continue routine eye care. Maintain a healthy lifestyle with regular exercise and balanced diet. Schedule annual eye examinations.',
-    'DME': 'Consult an endocrinologist to optimize blood sugar control. Ophthalmologic treatment with injections or laser therapy may be necessary. Follow up within 1-2 weeks.'
+    'DME': 'Consult an endocrinologist to optimize blood sugar control. Ophthalmologic treatment with injections or laser therapy may be necessary. Follow up within 1-2 weeks.',
+    'NONE': 'Please upload a valid OCT retinal scan image. Ensure the image is a grayscale OCT scan from an ophthalmology imaging system.'
 }
 
 loaded_model = None

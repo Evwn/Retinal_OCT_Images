@@ -109,6 +109,14 @@ function displayResults(data) {
 
     document.getElementById('resultFilename').textContent = 'File: ' + (data.filename || 'uploaded');
 
+    // Apply special styling for NONE class (unrelated images)
+    const resultCard = document.getElementById('resultCard');
+    if (data.predicted_class === 'NONE') {
+        resultCard.classList.add('result-invalid');
+    } else {
+        resultCard.classList.remove('result-invalid');
+    }
+
     document.getElementById('resultsSection').style.display = 'block';
 }
 
