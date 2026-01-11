@@ -21,7 +21,7 @@ app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE
 
 # Model configuration
 MODEL_PATH = 'oct_diagnosis_model.keras'
-IMG_SIZE = (224, 224)  # Adjust based on your model's input size
+IMG_SIZE = (128, 128)  # Model trained on 128x128 images
 
 # Label mapping - adjust these based on your model's classes
 LABEL_MAP = {
