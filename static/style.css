@@ -293,6 +293,62 @@ main {
     border-top-color: #fed7d7;
 }
 
+.result-probabilities {
+    padding: 16px 0;
+    border-top: 1px solid #eef4fb;
+}
+
+.result-probabilities h3 {
+    font-size: 0.95em;
+    color: #334155;
+    margin-bottom: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.probabilities-table {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.probability-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.prob-label {
+    font-weight: 600;
+    color: #334155;
+    min-width: 70px;
+    font-size: 0.9em;
+}
+
+.prob-bar-container {
+    flex: 1;
+    height: 24px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.prob-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #4f46e5, #06b6d4);
+    transition: width 0.5s ease;
+    border-radius: 6px;
+}
+
+.prob-value {
+    font-weight: 600;
+    color: #475569;
+    min-width: 45px;
+    text-align: right;
+    font-size: 0.9em;
+}
+
 .result-left {
     flex: 1.1;
 }

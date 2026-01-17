@@ -109,6 +109,28 @@ function displayResults(data) {
 
     document.getElementById('resultFilename').textContent = 'File: ' + (data.filename || 'uploaded');
 
+    // Display confidence for all classes
+    const probabilitiesTable = document.getElementById('probabilitiesTable');
+    probabilitiesTable.innerHTML = '';
+    
+    // Sort predictions by value (descending)
+    const sortedPredictions = Object.entries(data.all_predictions)
+        .sort((a, b) => b[1] - a[1]);
+    
+    sortedPredictions.forEach(([label, probability]) => {
+        const percentage = Math.round(probability * 100);
+        const row = document.createElement('div');
+        row.className = 'probability-row';
+        row.innerHTML = `
+            <span class="prob-label">${label}</span>
+            <div class="prob-bar-container">
+                <div class="prob-bar" style="width: ${percentage}%"></div>
+            </div>
+            <span class="prob-value">${percentage}%</span>
+        `;
+        probabilitiesTable.appendChild(row);
+    });
+
     // Apply special styling for NONE class (unrelated images)
     const resultCard = document.getElementById('resultCard');
     if (data.predicted_class === 'NONE') {
