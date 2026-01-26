@@ -38,6 +38,22 @@ header .subtitle {
     opacity: 0.7;
 }
 
+.disclaimer {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: linear-gradient(180deg, #fffaf0, #fff7ed);
+    border-left: 4px solid #f59e0b;
+    color: #92400e;
+    border-radius: 8px;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.disclaimer strong {
+    color: #92400e;
+    margin-right: 6px;
+}
+
 main {
     padding: 40px;
 }
